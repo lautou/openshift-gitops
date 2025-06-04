@@ -1,0 +1,13 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: mlops-argo-access
+  namespace: rmr
+roleRef:
+  kind: ClusterRole
+  name: admin  # Ou un rôle plus restreint si souhaité
+  apiGroup: rbac.authorization.k8s.io
+subjects:
+  - kind: ServiceAccount
+    name: mlops-argocd-application-controller  # Ou spécifique, si l'instance mlops a un SA dédié
+    namespace: mlops-gitops  # Namespace de l'instance ArgoCD 'mlops'
